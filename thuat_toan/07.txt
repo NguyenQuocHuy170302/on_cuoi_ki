@@ -1,0 +1,58 @@
+#include<iostream>
+#include<vector>
+
+using namespace std;
+
+bool check(double* boy, int n, double value)
+{
+	bool Return = false;
+	vector<double>temp;
+	for (size_t i = 0; i < n; i++)
+		temp.push_back(boy[i] - value);
+	
+	double min = 1000000;
+	for (size_t i = 0; i < n; i++)
+	{
+		if (temp[i] > 0)
+		{
+			Return = true;
+			if (temp[i] < min)
+				min = temp[i];
+		}
+	}
+	
+	if (!Return)
+		return false;
+	int pos;
+	for (size_t i = 0; i < n; i++)
+	{
+		if (min == temp[i])
+			pos = i;
+	}
+	boy[pos] = 0;
+
+	return Return;
+}
+
+int main()
+{
+	int n;
+	cin >> n;
+	double* boy = new double[n];
+	double* girl = new double[n];
+	for (size_t i = 0; i < n; i++)
+	{
+		cin >> boy[i];
+		cin >> girl[i];
+	}
+	for (size_t i = 0; i < n; i++)
+	{
+		if (check(boy, n, girl[i]) == false)
+		{
+			cout << "No";
+			return 0;
+		}
+	}
+	cout << "Yes";
+	return 0;
+}

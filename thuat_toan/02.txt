@@ -1,0 +1,44 @@
+#include<iostream>
+
+using namespace std;
+
+int main()
+{
+	
+	int a;
+	cin >> a;
+	while (a > 0)
+	{
+		bool check = false;
+		int n;
+		int sum = 0;
+		cin >> n;
+		long long int* arr = new long long int[n];
+		for (size_t i = 0; i < n; i++)
+		{
+			cin >> arr[i];
+			sum += arr[i];
+		}
+
+		for (size_t i = 0; i < n; i++)
+		{
+			int sum_left = 0;
+			for (size_t j = 0; j < i; j++)
+			{
+				sum_left += arr[j];
+			}
+			if (sum - sum_left == sum_left-arr[i])
+			{
+				check = true;
+				break;
+			}
+		}
+		if (check)
+			cout << "YES" << endl;
+		else
+			cout << "NO" << endl;
+		a--;
+	}
+
+	return 0;
+}

@@ -1,0 +1,28 @@
+#include<iostream>
+
+using namespace std;
+
+int main()
+{
+	int N, Q;
+	cin >> N >> Q;
+	int** arr = new int* [N];
+	for (size_t i = 0; i <N ; i++)
+	{
+		int size;
+		cin >> size;
+		arr[i] = new int[size];
+		for (size_t j = 0; j < size; j++)
+		{
+			cin >> arr[i][j];
+		}
+	}
+	
+	for (size_t i = 0; i < Q; i++)
+	{
+		int x, y;
+		cin >> x >> y;
+		cout << arr[x][y] << endl;
+	}
+	return 0;
+}

@@ -1,0 +1,52 @@
+#include<iostream>
+#include<string>
+
+using namespace std;
+
+bool Check(bool*check,int n)
+{
+	for (size_t i = 0; i <=n; i++)
+	{
+		if (check[i] == true)
+			return true;
+	}
+	return false;
+}
+
+int main()
+{
+
+	int n;
+	cin >> n;
+	bool* check = new bool[n + 1];
+	for (size_t i = 0; i < n+1; i++)
+	{
+		check[i] = true;
+	}
+	check[0] = false;
+	check[1] = false;
+	int choose = 2;
+	while (Check(check,n))
+	{
+		cout << choose << " ";
+		for (int  i = 1; ; i++)
+		{
+			if (i * choose >n)
+				break;
+			check[i * choose] = false;
+			
+		}
+		
+		for (size_t i = choose+1; i <= n; i++)
+		{
+			if (check[i] == true)
+			{
+				choose = i;
+				break;
+			}
+		}
+
+	}
+
+	return 0;
+}
