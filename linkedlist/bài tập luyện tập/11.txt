@@ -1,0 +1,29 @@
+Node* deleteSingle(Node* head)
+{
+    Node* temp = head;
+
+    if (head->value != head->next->value)
+        return head->next;
+
+    while (temp->next->next!=NULL)
+    {
+        temp = temp->next;
+    }
+
+    if (temp->value != temp->next->value)
+    {
+        temp->next = NULL;
+        return head;
+    }
+    
+    temp = head;
+    while (temp->next->next->next!=NULL)
+    {
+        if (temp->value != temp->next->value && temp->next->value != temp->next->next->value)
+            break;
+            temp=temp->next;
+    }
+    temp->next = temp->next->next;
+    
+    return head;
+}

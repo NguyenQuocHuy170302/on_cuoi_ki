@@ -1,0 +1,18 @@
+void print(Node* head)
+{
+	if (head == NULL)
+		return;
+
+	while (true)
+	{
+		
+		if (head->next == NULL)
+		{
+			cout << head->value;
+			break;
+		}
+		else
+			cout << head->value << " ";
+		head = head->next;
+	}
+}

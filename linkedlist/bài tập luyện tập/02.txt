@@ -1,0 +1,96 @@
+Node* insert(Node* head, int value)
+{
+    Node* add = new Node;
+    add->value = value;
+    add->next = NULL;
+
+    if (head == NULL)
+    {
+        return add;
+    }
+
+    else if (head->next == NULL)
+    {
+        if (head->value >= value)
+        {
+            add->next = head;
+            return add;
+        }
+        else
+        {
+            head->next = add;
+            return head;
+        }
+    }
+    else
+    {
+        bool check = true;
+        if (head->value > head->next->value)
+            check = false;
+
+        Node* temp = head;
+
+        if (check)
+        {
+            if (temp->value >= value)
+            {
+                add->next = temp;
+                return add;
+            }
+            while (temp->next!=NULL)
+            {
+                temp = temp->next;
+            }
+            if (temp->value <= value)
+            {
+                temp->next = add;
+                return head;
+            }
+        }
+
+        else
+        {
+            if (temp->value <= value)
+            {
+                add->next = temp;
+                return add;
+           }
+            while (temp->next!=NULL)
+            {
+                temp = temp->next;
+            }
+
+            if (temp->value >= value)
+            {
+                temp->next = add;
+                return head;
+            }
+        }
+
+        temp = head;
+
+        while (true)
+        {
+            if (check)
+            {
+                if (temp->value < value && value < temp->next->value)
+                {
+                    break;
+                }
+            }
+
+            else
+            {
+                if (temp->value > value && temp->next->value < value)
+                {
+                    break;
+                }
+            }
+            temp = temp->next;
+        }
+        add->next = temp->next;
+        temp->next = add;
+    }
+
+    return head;
+}

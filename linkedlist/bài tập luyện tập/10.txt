@@ -1,0 +1,11 @@
+Node* insertHead(Node* head, int value)
+{
+    Node* tail = new Node;
+    tail->value = value;
+    tail->next = NULL;
+    if (head == NULL)
+        return tail;
+
+    tail->next = head;
+    return tail;
+}

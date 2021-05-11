@@ -1,0 +1,21 @@
+void printLast(Node* head, int k)
+{
+	int size = 0;
+	Node* temp = head;
+	while (temp != NULL)
+	{
+		size++;
+		temp = temp->next;
+	}
+
+	temp = head;
+
+	int i = 0;
+	while (temp!=NULL)
+	{
+		if (i >= size - k)
+			cout << temp->value << " ";
+		i++;
+		temp = temp->next;
+	}
+}
