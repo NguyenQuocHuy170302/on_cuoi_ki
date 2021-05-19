@@ -1,0 +1,17 @@
+void truncate(char a[], int n)
+{
+	int size = 0;
+	while (a[size]<=255&&a[size]>=0)
+	{
+		size++;
+	}
+
+	if (size <= n)
+		return;
+	
+	for (size_t i = n; i < size; i++)
+	{
+		a[i] = -1;
+	}
+	
+}

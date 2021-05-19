@@ -1,0 +1,89 @@
+#include<iostream>
+#include<string>
+#include<vector>
+
+using namespace std;
+
+vector<string>arr;
+
+void Cout(string save)
+{
+	int a = 0;
+	while (a < save.size())
+	{
+		for (size_t i = 0; i < save.size()-1; i++)
+		{
+			if (save[i] > save[i + 1])
+				swap(save[i], save[i + 1]);
+		}
+		a++;
+	}
+
+
+	bool check = true;
+	for (size_t i = 0; i < arr.size(); i++)
+	{
+		if (save == arr[i])
+		{
+			check = false;
+			break;
+		}
+	}
+
+	if (check)
+		arr.push_back(save);
+}
+
+void Try(string s, string save,bool* Bool ,int k)
+{
+	for (size_t i = 0; i < s.size(); i++)
+	{
+		if (Bool[i] == true)
+		{
+			save[k] = s[i];
+			Bool[i] = false;
+
+			if (k == save.size() - 1)
+				Cout(save);
+
+			else
+				Try(s, save, Bool, k + 1);
+			
+			Bool[i] = true;
+		}
+	}
+}
+
+
+int main()
+{
+	int n, k;
+	cin >> n >> k;
+
+	string s;
+	string save;
+	bool* Bool = new bool[n];
+	
+	for (size_t i = 0; i < n; i++)
+	{
+		Bool[i] = true;
+	}
+
+	for (size_t i = 0; i < n; i++)
+	{
+		s += char(i + 'a');
+	}
+
+	for (size_t i = 0; i < k; i++)
+	{
+		save += '$';
+	}
+
+	Try(s, save, Bool, 0);
+
+
+	for (size_t i = 0; i < arr.size(); i++)
+	{
+		cout << arr[i] << endl;
+	}
+}

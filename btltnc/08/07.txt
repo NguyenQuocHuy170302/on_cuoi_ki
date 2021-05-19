@@ -1,0 +1,19 @@
+void trim_left(char a[])
+{
+	int size = 0;
+	while (a[size]<=255&&a[size]>=0)
+	{
+		size++;
+	}
+
+	int k = 0;
+	while (a[k]==' ')
+	{
+		for (size_t i = k; i < size-1; i++)
+		{
+			a[i] = a[i + 1];
+		}
+		a[size - 1] = -1;
+		size--;
+	}
+}

@@ -1,0 +1,73 @@
+#include<iostream>
+
+using namespace std;
+
+void Cout(int* arr1, int n1, int* arr2, int n2)
+{
+	int sum1 = 0;
+	int sum2 = 0; 
+
+	for (size_t i = 0; i < n1; i++)
+		sum1 += arr1[i];
+	
+	for (size_t i = 0; i < n2; i++)
+		sum2 += arr1[arr2[i]];
+
+	if (sum1 - sum2 == sum2)
+	{
+		string s;
+		for (size_t i = 0; i < n1; i++)
+			s += ' ';
+
+		for (size_t i = 0; i < n2; i++)
+		{
+			s[arr2[i]] = 'B';
+		}
+		for (size_t i = 0; i < n1; i++)
+		{
+			if (s[i] != 'B')
+				s[i] = 'A';
+		}
+		cout << s << endl;
+	}
+}
+
+void Play(int*arr1,int n1,int*arr2,int n2,bool*check,int a,int temp)
+{
+	for (size_t i = temp; i < n1; i++)
+	{
+		if (check[i] == true)
+		{
+			arr2[a] = i;
+			check[i] = false;
+
+			if (a == n2 - 1)
+				Cout(arr1, n1, arr2, n2);
+			else
+				Play(arr1, n1, arr2, n2, check, a + 1, i + 1);
+			check[i] = true;
+		}
+	}
+}
+
+int main()
+{
+	int n;
+	cin >> n;
+
+	int* arr = new int[n];
+	bool* check = new bool[n];
+	for (size_t i = 0; i < n; i++)
+	{
+		cin >> arr[i];
+		check[i] = true;
+	}
+	
+	for (size_t i = 1; i < n-1; i++)
+	{
+		int* arr2 = new int[i];
+		Play(arr, n, arr2, i, check, 0, 0);
+	}
+
+	return 0;
+}

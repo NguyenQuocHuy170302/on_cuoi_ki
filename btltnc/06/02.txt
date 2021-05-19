@@ -1,0 +1,50 @@
+#include<iostream>
+#include<string>
+using namespace std;
+
+void Try(bool* Bool,string s, string getString, int k,int m)
+{
+	for (size_t i = 0; i < s.size(); i++)
+	{
+		if (Bool[i] == true)
+		{
+			getString[m] = s[i];
+			Bool[i] = false;
+
+			if (m == k-1)
+				cout << getString << endl;
+
+			else
+				Try(Bool, s, getString, k,m+1);
+			Bool[i] = true;
+		}
+	}
+}
+
+int main()
+{
+	int n, k;
+	cin >> n >> k;
+	string s;
+
+	for (size_t i = 'a'; i <'a'+n ; i++)
+	{
+		s += char(i);
+	}
+
+	bool* Bool = new bool[s.size()];
+	for (size_t i = 0; i < s.size(); i++)
+	{
+		Bool[i] = true;
+	}
+
+	string getString;
+	for (size_t i = 0; i < k; i++)
+	{
+		getString += ' ';
+	}
+
+	Try(Bool, s, getString, k,0);
+
+	return 0;
+}

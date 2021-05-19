@@ -1,0 +1,17 @@
+bool is_palindrome(char a[])
+{
+	int size = 0;
+	while (a[size]<=255&&a[size]>=0)
+	{
+		size++;
+	}
+
+	for (size_t i = 0; i < size/2; i++)
+	{
+		if (a[i] != a[size - 1 - i])
+		{
+			return false;
+		}
+	}
+	return true;
+}

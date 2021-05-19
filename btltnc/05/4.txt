@@ -1,0 +1,127 @@
+#include<iostream>
+#include<fstream>
+#include<string>
+#include<vector>
+#include <cstdlib>
+#include <ctime>	
+
+
+using namespace std;
+
+bool play(string guess,string&temp, char x)
+{
+	bool check = false;
+	vector<int>placeChar;
+	for (size_t i = 0; i <guess.size() ; i++)
+	{
+		if (guess[i] == x)
+		{
+			check = true;
+			placeChar.push_back(i);
+		}
+	}
+	if (check == false)
+		cout << "character no exist!" << endl;
+
+	else
+	{
+		for (size_t i = 0; i < placeChar.size(); i++)
+		{
+			temp[placeChar[i]] = x;
+		}
+	}
+
+	for (size_t i = 0; i < guess.size(); i++)
+	{
+		cout << temp[i];
+	}
+	cout << endl;
+
+	return check;
+}
+
+int main()
+{
+	vector<string>words;
+	ifstream file;
+	file.open("abc.txt");
+	
+	string s;
+
+	while (!file.eof())
+	{
+		string temp;
+		getline(file, temp);
+		s += temp;
+	}
+	s = ' ' + s + ' ';
+
+	int star = -1;
+	int end = -1;
+	for (size_t i = 1; i < s.size()-1; i++)
+	{
+		
+		if (s[i] != ' ' && s[i - 1] == ' ')
+			star = i;
+		if (s[i] != ' ' && s[i + 1] == ' ')
+			end = i;
+
+		if (star != -1 && end != -1)
+		{
+			
+			words.push_back( s.substr(star, end - star + 1));
+			star = -1;
+			end = -1;
+		}
+	}
+
+	string temp;
+	for (size_t i = 0; i < words[words.size()-1].size()-1; i++)
+	{
+		temp += words[words.size() - 1][i];
+	}
+
+	words[words.size() - 1] = temp;
+
+	srand(time(NULL));
+	int res = rand()%words.size();
+
+	string guess = words[res];
+
+	cout << guess.size() << " character" << endl;
+
+	int checkfalse = 0;
+
+	string tempChar;
+	for (size_t i = 0; i<guess.size(); i++)
+	{
+		tempChar += '$';
+	}
+
+	while (true)
+	{
+		char x;
+		cout << "GUESS:";
+		cin >> x;
+		
+		if (play(guess, tempChar, x) == false)
+			checkfalse++;
+
+		cout << 10 - checkfalse << " GUESS" << endl;
+
+		cout << endl;
+
+		if (checkfalse == 10)
+		{
+			cout << "you lost!" << endl;
+			break;
+		}
+		else if (guess == tempChar)
+		{
+			cout << "you Win!" << endl;
+			break;
+		}
+	}
+
+	return 0;
+}

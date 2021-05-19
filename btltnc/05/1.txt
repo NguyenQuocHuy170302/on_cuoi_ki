@@ -1,0 +1,90 @@
+#include<iostream>
+
+using namespace std;
+
+void getBom(int** arr,int** temp, int m, int n, int k)
+{
+	
+	
+	for (size_t i = 0; i <m+1 ; i++)
+	{
+		for (size_t j = 0; j < n+1; j++)
+		{
+			arr[i][j] = 0;
+			temp[i][j] = 0;
+		}
+	}
+
+	for (size_t i = 0; i < k; i++)
+	{
+		int x = rand() % m+1;
+		int y = rand() % n+1;
+
+		if (arr[x][y]==0)
+			arr[x][y] = 1;
+		else
+			i--;
+	}
+
+}
+
+void play(int** arr,int**temp, int m, int n,int x,int y)
+{
+	if (arr[x][y] == 1)
+		cout << "You Death!" << endl;
+	
+	else
+	{
+		for (size_t i = x - 1; i < x + 1; i++)
+		{
+			for (size_t j = y - 1; j < y + 1; j++)
+					temp[x][y] += arr[i][j];
+			
+		}
+
+		if (temp[x][y] == 0)
+			temp[x][y] = -1;
+
+		for (size_t i = 1; i <= m; i++)
+		{
+			for (size_t j = 1; j <= n; j++)
+			{
+					cout << temp[i][j] << " ";
+			}
+			cout << endl;
+		}
+	}
+}
+
+int main()
+{
+
+	int m, n, k;
+	cin >> m >> n >> k;
+
+	int** arr = new int*[m+1];
+	int** temp = new int* [m+1];
+	
+
+	for (size_t i = 0; i < m+1; i++)
+	{
+		arr[i] = new int[n+1];
+		temp[i] = new int[n + 1];
+	}
+
+	getBom(arr,temp, m, n, k);
+
+	while (true)
+	{
+		int x, y;
+		cin >> x;
+		cin >> y;
+
+		play(arr,temp, m, n, x, y);
+
+		cout << endl;
+	}
+	
+
+	return 0;
+}

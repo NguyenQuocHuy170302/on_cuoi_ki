@@ -1,0 +1,95 @@
+#include<iostream>
+#include<string>
+#include<vector>
+
+using namespace std;
+vector<string>arr;
+
+int sum[100] = { 0 };
+
+int Sum()
+{
+	int Return = 0;
+
+	for (size_t i = 0; i < 100; i++)
+	{
+		if (sum[i] != 0)
+			Return += sum[i];
+		else
+			break;
+	}
+	return Return;
+}
+
+void Cout()
+{
+	string s;
+	for (size_t i = 0; i < 100; i++)
+	{
+		if (sum[i] != 0)
+			s += char(sum[i] + '0');
+		else
+			break;
+	}
+
+	int a = 0;
+	while (a<s.size())
+	{
+		for (size_t i = 0; i < s.size()-1; i++)
+		{
+			if (s[i] > s[i + 1])
+				swap(s[i], s[i + 1]);
+		}
+		a++;
+	}
+
+	bool check = true;
+
+	for (size_t i = 0; i < arr.size(); i++)
+	{
+		if (s == arr[i])
+		{
+			check = false;
+			break;
+		}
+	}
+
+	if (check)
+		arr.push_back(s);
+}
+
+void Try(int n,int k)
+{
+	for (size_t i = 1; i < n; i++)
+	{
+		if (Sum() + i < n)
+		{
+			sum[k] = i;
+			Try(n, k + 1);
+		}
+
+		else if (Sum() + i == n)
+		{
+			sum[k] = i;
+			Cout();
+		}
+		sum[k] = 0;
+	}
+}
+
+int main()
+{
+	int n;
+	cin >> n;
+	Try(n, 0);
+
+	cout << endl;
+	cout << arr.size() << endl;
+	cout << endl;
+
+	for (size_t i = 0; i < arr.size(); i++)
+	{
+		cout << arr[i] << endl;
+	}
+
+}

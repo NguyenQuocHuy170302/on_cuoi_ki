@@ -1,0 +1,437 @@
+#include<iostream>
+#include<string>
+#include <cstdlib>
+#include <ctime>
+#include<time.h>
+
+using namespace std;
+
+const int space = 20;
+
+void wait(int seconds)
+{
+	clock_t ew;
+	ew = clock() + seconds * CLOCKS_PER_SEC;
+	while (clock() < ew) {}
+}
+
+void Cout(int n)
+{
+	for (size_t i = 0; i < n; i++)
+	{
+		cout << " ";
+	}
+}
+
+void Sort(int arr[])
+{
+	int a = 0;
+	while (a < 13)
+	{
+		for (size_t i = 0; i < 12; i++)
+		{
+			if (arr[i] > arr[i + 1])
+				swap(arr[i], arr[i + 1]);
+		}
+		a++;
+	}
+}
+
+string Return(int n)
+{
+	string s;
+
+	int temp1 = n / 4 + 2;
+	int temp2 = n % 4;
+
+	if (temp1 <= 9)
+	{
+		s = char(temp1 + '0');
+		s += ' ';
+	}
+
+	else
+	{
+		if (temp1 == 10)
+			s = "10 ";
+		else if (temp1 == 11)
+			s = "J ";
+		else if (temp1 == 12)
+			s = "Q ";
+		else if (temp1 == 13)
+			s = "K ";
+		else if (temp1 == 14)
+			s = "A ";
+	}
+
+	if (temp2 == 0)
+		s += "spades";
+	else if (temp2 == 1)
+		s += "clubs";
+	else if (temp2 == 2)
+		s += "diamonds";
+	else
+		s += "hearts";
+
+	return s;
+}
+
+void Card(int player[], bool check[])
+{
+	int i = 0;
+	while (true)
+	{
+		int res = rand() % 52;
+		if (check[res] == true)
+		{
+			player[i] = res;
+			check[res] = false;
+		}
+		else
+			i--;
+		if (i == 12)
+			break;
+
+		i++;
+	}
+	Sort(player);
+}
+
+void coutCard(int player1[], int player2[], int player3[], int player4[])
+{
+	string temp = "player1";
+	int x = temp.size();
+	cout << "player1"; Cout(space);
+	cout << "player2"; Cout(space);
+	cout << "player3"; Cout(space);
+	cout << "player4"; Cout(space);
+	cout << endl << endl;
+
+	for (size_t i = 0; i < 13; i++)
+	{
+		cout << Return(player1[i]);
+		Cout(x + space - Return(player1[i]).size());
+		cout << Return(player2[i]);
+		Cout(x + space - Return(player2[i]).size());
+		cout << Return(player3[i]);
+		Cout(x + space - Return(player3[i]).size());
+		cout << Return(player4[i]);
+
+		cout << endl;
+	}
+	cout << endl;
+}
+
+bool check2Space(int player[])
+{
+	for (size_t i = 0; i < 13; i++)
+	{
+		if (player[i] == 0)
+			return true;
+	}
+	return false;
+}
+
+int checkPlayfirst(int player1[], int player2[], int player3[], int player4[])
+{
+	if (check2Space(player1))
+		return 1;
+	else if (check2Space(player2))
+		return 2;
+	else if (check2Space(player3))
+		return 3;
+	else
+		return 4;
+}
+
+void outCard(bool check, int n, string s)
+{
+	if (!check)
+		cout << s << " :" << "PASS" << endl;
+	else
+		cout << s << " :" << Return(n) << endl;
+}
+
+void playFirst(int player1[], int player2[], int player3[], int player4[], bool chekOutCard[])
+{
+	int temp = checkPlayfirst(player1, player2, player3, player4);
+
+	if (temp == 1)
+		outCard(1, 0, "player 1");
+	else if (temp == 2)
+		outCard(1, 0, "player 2");
+	else if (temp == 3)
+		outCard(1, 0, "player 3");
+	else
+		outCard(1, 0, "player 4");
+
+	chekOutCard[0] = false;
+
+}
+
+int checkNext(int numberPlayer, bool trueOrFalse)
+{
+	if (numberPlayer <= 2)
+	{
+		if (trueOrFalse)
+			return numberPlayer + 1;
+		else
+			return numberPlayer + 2;
+	}
+	if (numberPlayer == 3)
+	{
+		if (trueOrFalse)
+			return 4;
+		else
+			return 1;
+	}
+	if (numberPlayer == 4)
+	{
+		if (trueOrFalse)
+			return 1;
+		else
+			return 2;
+	}
+}
+
+int randomCard(int  player[], bool checkOutCard[])
+{
+	while (true)
+	{
+		int res = rand() % 13;
+		if (checkOutCard[player[res]] == true)
+			return player[res];
+	}
+}
+
+bool checkEnd(int player[], bool checkOutCard[])
+{
+	for (size_t i = 0; i < 13; i++)
+	{
+		if (checkOutCard[player[i]] == true)
+			return false;
+	}
+	return true;
+}
+
+bool checkCard(int n, int player[])
+{
+	for (size_t i = 0; i < 13; i++)
+	{
+		if (player[i] == n)
+			return true;
+	}
+
+	return false;
+}
+
+void play(int player1[], int player2[], int player3[], int player4[], bool chekOutCard[])
+{
+	playFirst(player1, player2, player3, player4, chekOutCard);
+	int playerPresent = checkPlayfirst(player1, player2, player3, player4);
+
+	int oldCard = 0;
+	bool checkPass1 = false;
+	bool checkPass2 = false;
+	bool checkPass3 = false;
+	bool checkPass4 = false;
+
+
+	while (true)
+	{
+	
+		wait(2);
+
+		int card;
+		if (playerPresent == 1)
+		{
+
+			if (checkPass1 == false)
+			{
+				card = randomCard(player2, chekOutCard);
+
+				if (card > oldCard)
+				{
+					playerPresent = 2;
+					oldCard = card;
+					chekOutCard[card] = false;
+					outCard(1, card, "player 2");
+				}
+				else
+				{
+					playerPresent = 2;
+					outCard(false, card, "player 2");
+					checkPass1 = true;
+				}
+			}
+			else
+				playerPresent = 2;
+
+			if (checkCard(oldCard, player3))
+			{
+				oldCard = 0;
+				checkPass1 = false;
+				checkPass2 = false;
+				checkPass3 = false;
+				checkPass4 = false;
+			}
+		}
+
+		else if (playerPresent == 2)
+		{
+			if (checkPass2 == false)
+			{
+				card = randomCard(player3, chekOutCard);
+
+				if (card > oldCard)
+				{
+					playerPresent = 3;
+					oldCard = card;
+					chekOutCard[card] = false;
+					outCard(1, card, "player 3");
+				}
+				else
+				{
+					playerPresent = 3;
+					outCard(false, card, "player 3");
+					checkPass2 = true;
+				}
+			}
+			else
+				playerPresent = 3;
+
+			if (checkCard(oldCard, player4))
+			{
+				oldCard = 0;
+				checkPass1 = false;
+				checkPass2 = false;
+				checkPass3 = false;
+				checkPass4 = false;
+			}
+		}
+
+		else if (playerPresent == 3)
+		{
+			if (checkPass3 == false)
+			{
+				card = randomCard(player4, chekOutCard);
+
+				if (card > oldCard)
+				{
+					playerPresent = 4;
+					oldCard = card;
+					chekOutCard[card] = false;
+					outCard(1, card, "player 4");
+				}
+				else
+				{
+					playerPresent = 4;
+					outCard(false, card, "player 4");
+					checkPass3 = true;
+				}
+			}
+			else
+				playerPresent = 4;
+
+			if (checkCard(oldCard, player1))
+			{
+				oldCard = 0;
+				checkPass1 = false;
+				checkPass2 = false;
+				checkPass3 = false;
+				checkPass4 = false;
+			}
+		}
+		else
+		{
+			if (checkPass4 == false)
+			{
+				card = randomCard(player1, chekOutCard);
+
+				if (card > oldCard)
+				{
+					playerPresent = 1;
+					oldCard = card;
+					chekOutCard[card] = false;
+					outCard(1, card, "player 1");
+				}
+				else
+				{
+					playerPresent = 1;
+					outCard(false, card, "player 1");
+					checkPass4 = true;
+				}
+			}
+			else
+				playerPresent = 1;
+
+			if (checkCard(oldCard, player2))
+			{
+				oldCard = 0;
+				checkPass1 = false;
+				checkPass2 = false;
+				checkPass3 = false;
+				checkPass4 = false;
+			}
+		}
+		if (checkEnd(player1, chekOutCard))
+		{
+			cout << endl;
+			cout << " PLAYER 1 WIN!";
+			break;
+		}
+
+		else if (checkEnd(player2, chekOutCard))
+		{
+			cout << endl;
+			cout << " PLAYER 2 WIN!";
+			break;
+		}
+
+		else if (checkEnd(player3, chekOutCard))
+		{
+			cout << endl;
+			cout << " PLAYER 3 WIN!";
+			break;
+		}
+
+		else if (checkEnd(player4, chekOutCard))
+		{
+			cout << endl;
+			cout << " PLAYER 4 WIN!";
+			break;
+		}
+	}
+}
+
+int main()
+{
+	srand(time(NULL));
+
+	int arr[52];
+	bool check[52];
+	bool checkOutCard[52];
+
+	for (size_t i = 0; i < 52; i++)
+	{
+		check[i] = true;
+		checkOutCard[i] = true;
+	}
+
+	int player1[13] = { -1 };
+	int player2[13] = { -1 };
+	int player3[13] = { -1 };
+	int player4[13] = { -1 };
+
+	Card(player1, check);
+	Card(player2, check);
+	Card(player3, check);
+	Card(player4, check);
+
+	coutCard(player1, player2, player3, player4);
+
+	play(player1, player2, player3, player4, checkOutCard);
+
+
+	return 0;
+}
