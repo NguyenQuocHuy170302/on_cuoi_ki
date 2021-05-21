@@ -1,0 +1,37 @@
+#include<iostream>
+#include<vector>
+#include<map>
+#include<string>
+
+using namespace std;
+
+int main() {
+	string s;
+	map<string, int > count;
+	getline(cin, s);
+	s = ' ' + s + ' ';
+
+	int star = -1;
+	int end = -1;
+	for (size_t i = 1; i < s.size()-1; i++)
+	{
+		if (s[i] != ' ' && s[i - 1] == ' ')
+			star = i;
+		if (s[i] != ' ' && s[i + 1] == ' ')
+			end = i;
+		if (star != -1 && end != -1)
+		{
+			count[s.substr(star, end - star + 1)]++;
+			star = -1;
+			end = -1;
+		}
+	}
+
+	map<string, int>::iterator it;
+	for (it = count.begin(); it != count.end(); it++) {
+		cout << it->first << ": " << it->second << endl;
+	}
+	
+
+	return 0;
+}
