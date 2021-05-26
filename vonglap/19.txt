@@ -1,0 +1,21 @@
+#include<iostream>
+
+using namespace std;
+
+int main () {
+	
+	int temp = -10;
+
+	while (true)
+	{
+		int a;
+		cin >> a;
+		if (a != temp)
+			cout << a << " ";
+		temp = a;
+		if (temp < 0)
+			break;
+	}
+	
+	return 0;
+}

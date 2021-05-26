@@ -1,0 +1,27 @@
+#include<iostream>
+
+using namespace std;
+
+int main() {
+	int N, K;
+	cin >> N >> K;
+	int* arr = new int[N];
+	int count = 0;
+	for (size_t i = 0; i < N; i++)
+	{
+		cin >> arr[i];
+	}
+
+	for (size_t i = 0; i < N-1; i++)
+	{
+		for (size_t j = i+1; j < N; j++)
+		{
+			if ((arr[i] + arr[j]) % K == 0)
+				count++;
+		}
+	}
+
+	cout << count;
+
+	return 0;
+}

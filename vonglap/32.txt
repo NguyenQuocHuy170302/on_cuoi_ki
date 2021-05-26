@@ -1,0 +1,24 @@
+#include<iostream>
+
+using namespace std;
+
+int main () {
+	int n;
+	cin >> n;
+	double temp;
+	cin >> temp;
+	double max = temp;
+	double min = temp;
+	while (n>1) {
+		cin >> temp;
+		if (max < temp)
+			max = temp;
+		if (min > temp)
+			min = temp;
+		n--;
+	}
+
+	cout << max << endl;
+	cout << min;
+	return 0;
+}

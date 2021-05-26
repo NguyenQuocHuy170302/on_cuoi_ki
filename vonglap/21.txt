@@ -1,0 +1,37 @@
+#include<iostream>
+#include<vector>
+
+using namespace std;
+
+int main () {
+	int n;
+	cin >> n;
+	vector<int>save;
+	for (size_t i = 0; i < 2; i++)
+	{
+		save.push_back(1);
+	}
+	int temp = 1;
+	bool check = false;
+	while (temp<=n)
+	{
+		if (temp == n)
+			check = true;
+	 temp = save[save.size() - 1] + save[save.size() - 2];
+		if (temp <= n)
+			save.push_back(temp);
+		
+	}
+
+	if (check)
+		cout << "Thuoc day Fibonacci" << endl;
+	else
+		cout << "Khong thuoc day Fibonacci" << endl;
+
+	for (size_t i = 0; i < save.size(); i++)
+	{
+		cout << save[i] << " ";
+	}
+
+	return 0;
+}

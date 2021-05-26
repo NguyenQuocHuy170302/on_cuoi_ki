@@ -1,0 +1,18 @@
+#include<iostream>
+#include<iomanip>
+
+using namespace std;
+
+int main () {
+	cout << setprecision(2) << fixed;
+	double sum = 0;
+	for (size_t i = 0; i < 5; i++)
+	{
+		double score;
+		cin >> score;
+		sum += score;
+	}
+
+	cout << 1.0f * sum / 5;
+	return 0;
+}

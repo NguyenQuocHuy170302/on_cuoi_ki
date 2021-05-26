@@ -1,0 +1,23 @@
+#include<iostream>
+
+using namespace std;
+
+int main () {
+	int n;
+	cin >> n;
+	int a, b;
+	cin >> a >> b;
+	int mina = a;
+	int minb = b;
+	while (n>1)
+	{
+		cin >> a >> b;
+		if (mina > a)
+			mina = a;
+		if (minb > b)
+			minb = b;
+		n--;
+	}
+	cout << mina * minb;
+	return 0;
+}

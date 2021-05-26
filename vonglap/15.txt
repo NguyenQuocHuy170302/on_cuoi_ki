@@ -1,0 +1,41 @@
+#include<iostream>
+#include<map>
+
+using namespace std;
+
+int main() {
+	int n;
+	cin >> n;
+		
+	int count[6];
+	
+	for (size_t i = 0; i < 6; i++)
+	{
+		count[i] = 0;
+	}
+
+	for (size_t i = 0; i < n; i++)
+	{
+		int temp;
+		cin >> temp;
+		count[temp]++;
+	}
+	
+	int max = 0;
+	for (size_t i = 0; i < 6; i++)
+	{
+		if (max < count[i])
+			max = count[i];
+	}
+
+	for (size_t i = 0; i < 6; i++)
+	{
+		if (count[i] == max)
+		{
+			cout << i;
+			return 0;
+		}
+	}
+
+	return 0;
+}

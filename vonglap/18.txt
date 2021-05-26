@@ -1,0 +1,17 @@
+#include<iostream>
+#include<iomanip>
+using namespace std;
+
+int main () {
+
+		double F;
+		cin >> F;
+		double C = 1.0f*(F - 32) * 5 / 9;
+		double K = C + 273.15;
+		cout << F << " ";
+		printf("%.2f", C);
+		cout << " ";
+		printf("%.2f", K);
+	
+	return 0;
+}

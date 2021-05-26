@@ -1,0 +1,25 @@
+#include<iostream>
+#include<map>
+using namespace std;
+
+
+
+int main() {
+	int N;
+	map<int, bool>check;
+	cin >> N;
+	for (size_t i = 0; i < N; i++)
+	{
+		int temp;
+		cin >> temp;
+		if (check[temp] == true)
+		{
+			cout << "Yes";
+			return 0;
+		}
+		check[temp] = true;
+	}
+
+	cout << "No";
+		return 0;
+}

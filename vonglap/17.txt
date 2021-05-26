@@ -1,0 +1,18 @@
+#include<iostream>
+#include<iomanip>
+using namespace std;
+
+int main () {
+	cout << setprecision(2) << fixed;
+	double min, max, step;
+	cin >> min >> max >> step;
+
+	for (double F = min; F <= max; F+=step)
+	{
+		double C = 1.0f*(F - 32) * 5 / 9;
+		double K = C + 273.15;
+		cout << F << " " << C << " " << K << endl;
+	}
+
+	return 0;
+}

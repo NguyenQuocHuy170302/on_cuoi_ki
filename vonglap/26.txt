@@ -1,0 +1,29 @@
+#include<iostream>
+
+using namespace std;
+
+void Cout(int n) {
+	for (size_t i = 0; i < n; i++)
+	{
+		cout << " ";
+	}
+}
+
+int main () {
+	int n;
+	cin >> n;
+
+	for (int i = n-1; i >=0 ; i--)
+	{
+		Cout(n - i - 1);
+		for (size_t j = 0; j <2*i+1 ; j++)
+		{
+			cout << "*";
+		}
+		Cout(n - i - 1);
+		cout << endl;
+	}
+
+
+	return 0;
+}

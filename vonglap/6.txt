@@ -1,0 +1,99 @@
+#include<iostream>
+#include<map>
+#include<iomanip>
+
+using namespace std;
+
+void sort(double** arr, int n, int col) {
+	int a = 0;
+	while (a < n)
+	{
+		for (size_t i = 0; i < n - 1; i++)
+		{	
+			if (arr[i][col] < arr[i + 1][col]) {
+				for (size_t j = 0; j < 5; j++)
+				{
+					swap(arr[i][j], arr[i + 1][j]);
+				}
+			}
+		}
+		a++;
+	}
+}
+void result(double** arr, int n) {
+	for (size_t i = 0; i < n; i++)
+	{
+		for (size_t j = 0; j <= 4; j++)
+		{
+			if (j != 1&&j==0)
+				cout << arr[i][j] << " ";
+			if (j != 1 && j != 0)
+			{
+				printf("%.1f", arr[i][j]);
+				cout << " ";
+			}
+		}
+		cout << endl;
+	}
+}
+int main() {
+	int n;
+	cin >> n;
+	double** arr = new double* [n];
+	for (size_t i = 0; i < n; i++)
+	{
+		arr[i] = new double[5];
+	}
+
+	for (size_t i = 0; i < n; i++)
+	{
+		for (size_t j = 2; j <= 4; j++)
+		{
+			double temp;
+			cin >> temp;
+			temp = 1.0f * temp;
+			if (temp < 0 || temp>10)
+			{
+				cout << "invalid";
+				return 0;
+			}
+			else
+				arr[i][j] = temp;
+		}
+		arr[i][1] = (arr[i][2] + arr[i][3] + arr[i][4]) / 3;
+	}
+
+	for (size_t i = 0; i < n; i++)
+	{
+		arr[i][0] = i + 1;
+	}
+
+	cout << "Theo diem mon Toan:" << endl;
+	cout << "SV Toan Ly Anh" << endl;
+	sort(arr, n, 2);
+	result(arr, n);
+	cout << endl;
+	cout << "Theo diem mon Anh:" << endl;
+	cout << "SV Toan Ly Anh" << endl;
+	sort(arr, n, 4);
+	result(arr, n);
+	cout << endl;
+	cout << "Theo diem trung binh:" << endl;
+	cout << "SV TB Toan Ly Anh" << endl;
+	sort(arr, n, 1);
+	for (size_t i = 0; i < n; i++)
+	{
+		for (size_t j = 0; j < 5; j++)
+		{
+			if(j==0)
+			cout << arr[i][j] << " ";
+			else
+			{
+				printf("%.1f", arr[i][j]);
+				cout << " ";
+			}
+		}
+		cout << endl;
+	}
+	return 0;
+}

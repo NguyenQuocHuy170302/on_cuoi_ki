@@ -1,0 +1,23 @@
+#include<iostream>
+#include<vector>
+
+using namespace std;
+
+int main () {
+	long long int  n;
+	cin >> n;
+	n = abs(n);
+	vector<int>arr;
+	while (n!=0)
+	{
+		arr.push_back(n % 2);
+		n /= 2;
+	}
+	bool check = false;
+	for (int i = arr.size()-1; i >= 0; i--)
+	{
+			cout << arr[i];
+	}
+	
+	return 0;
+}

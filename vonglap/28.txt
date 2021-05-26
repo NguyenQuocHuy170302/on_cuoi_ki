@@ -1,0 +1,26 @@
+#include<iostream>
+
+using namespace std;
+
+void printRow(int m,int n) {
+	for (size_t i = 0; i < m; i++)
+	{
+		cout << " ";
+	}
+	
+	for (size_t i = 0; i < n; i++)
+	{
+		cout << "*";
+	}
+	cout << endl;
+}
+int main () {
+	int n;
+	cin >> n;
+	for (size_t i = 0; i < n; i++)
+	{
+		printRow(i, n - i);
+	}
+
+	return 0;
+}

@@ -1,0 +1,44 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+
+bool check(int n) {
+	vector<int>save;
+	int temp = n;
+	int result = 0;
+	while (temp>0)
+	{
+		save.push_back(temp % 10);
+		temp /= 10;
+	}
+
+	for (size_t i = 0; i < save.size(); i++)
+	{
+		temp = 1;
+		for (size_t j = 0; j < save.size()-i-1; j++)
+		{
+			temp *= 10;
+		}
+		result += temp * save[i];
+	}
+	return result == n;
+}
+
+int main() {
+	int n;
+	cin >> n;
+	while (n > 0) {
+		int A, B;
+		cin >> A >> B;
+		int count = 0;
+		for (size_t i = A; i <= B; i++)
+		{
+			if (check(i))
+				count++;
+		}
+		cout << count << endl;
+		n--;
+	}
+
+	return 0;
+}

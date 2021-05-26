@@ -1,0 +1,67 @@
+#include<iostream>
+
+using namespace std;
+int m, n;
+int** arr = NULL;
+int value = 1;
+
+
+int main() {
+	int m, n;
+	cin >> m >> n;;
+	char** input = new char*[m+2];
+	char** output = new char* [m];
+	for (size_t i = 0; i < m; i++)
+	{
+		output[i] = new char[n];
+	}
+
+	for (size_t i = 0; i < m+2; i++)
+	{
+		input[i] = new char[n + 2];
+	}
+
+	for (size_t i = 1; i <= m; i++)
+	{
+		for (size_t j = 1; j <= n; j++)
+		{
+			cin >> input[i][j];
+		}
+	}
+
+	for (size_t i = 1; i <= m; i++)
+	{
+		for (size_t j = 1; j <= n; j++)
+		{
+			if (input[i][j] == '*')
+			{
+				output[i - 1][j - 1] = '*';
+			}
+				
+			else
+			{
+				int size = 0;
+				for (int h = -1; h <=1 ; h++)
+				{
+					for (int k = -1; k <= 1; k++)
+					{
+						if (input[i + h][j + k] == '*')
+							size++;
+					}
+				}
+				output[i-1][j-1] = char(size + '0');
+			}
+		}
+	}
+
+	for (size_t i = 0; i < m; i++)
+	{
+		for (size_t j = 0; j < n; j++)
+		{
+			cout << output[i][j] << " ";
+		}
+		cout << endl;
+	}
+
+	return 0;
+}
