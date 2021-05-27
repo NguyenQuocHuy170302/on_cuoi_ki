@@ -1,0 +1,28 @@
+#include<iostream>
+
+using namespace std;
+
+int main () {
+	int tu, mau;
+	cin >> tu >> mau;
+	
+	int UCLN;
+	for (size_t i = abs(mau); i >=1 ; i--)
+	{
+		if (abs(tu) % i == 0 && abs(mau) % i == 0) {
+			UCLN = i;
+			break;
+		}
+	}
+
+	tu/= UCLN;
+	mau /= UCLN;
+
+	tu*= abs(mau) / mau;
+	mau = abs(mau);
+	if (mau == 1)
+		cout << tu;
+	else
+		cout << tu << "/" << mau;
+	return 0;
+}

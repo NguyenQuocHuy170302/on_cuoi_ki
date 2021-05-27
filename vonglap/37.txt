@@ -1,0 +1,23 @@
+#include<iostream>
+
+using namespace std;
+
+int Try(int k,int n) {
+	if (k == 0 || k == n)
+		return 1;
+	else
+		return Try(k - 1, n - 1) + Try(k, n - 1);
+}
+int main () {
+
+	while (true)
+	{
+		int n, k;
+		cin >> n >> k;
+		if (k == -1 || k == -1)
+			break;
+		cout << Try(k, n) << endl;
+	}
+
+	return 0;
+}

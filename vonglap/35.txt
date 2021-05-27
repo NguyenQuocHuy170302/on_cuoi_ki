@@ -1,0 +1,23 @@
+#include<iostream>
+#include<iomanip>
+
+using namespace std;
+
+int main () {
+	cout << setprecision(2) << fixed;
+	double sum = 0;
+	int count = 0;
+	while (true)
+	{
+		double score;
+		cin >> score;
+		if (score < 0)
+			break;
+		if (score <= 10) {
+			sum += score;
+			count += 1;
+		}
+	}
+	cout << 1.0f * sum / count;
+	return 0;
+}

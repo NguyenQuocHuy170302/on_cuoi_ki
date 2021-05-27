@@ -1,0 +1,45 @@
+#include<iostream>
+#include<iomanip>
+
+using namespace std;
+
+int main () {
+	cout << setprecision(1) << fixed;
+	int n;
+	cin >> n;;
+	double* diem = new double[n];
+	double* heSo = new double[n];
+	double sum = 0;
+	double x = 0;
+	for (size_t i = 0; i < n; i++)
+	{
+		cin >> diem[i];
+		cin >> heSo[i];
+	}
+
+	for (size_t i = 0; i < n; i++)
+	{
+		if (diem[i] > 10 || diem[i] < 0) {
+			cout << "Sai diem so";
+			return 0;
+		}
+		
+		if (heSo[i] != 1 && heSo[i] != 1.5 && heSo[i] != 2 && heSo[i] != 2.5 && heSo[i] != 3) {
+			cout << "Sai he so";
+				return 0;
+		}
+		sum += diem[i] * heSo[i];
+		x += heSo[i];
+	}
+
+	cout << "Tong so mon hoc can tinh DTB: " << n << endl;
+
+	for (size_t i = 0; i < n; i++)
+	{
+		cout << "Diem mon hoc " << i << ": " << diem[i] << endl;
+		cout << "He so mon hoc " << i << ": " << heSo[i] << endl;
+	}
+	cout << "Tong so he so: " << x << endl;
+	cout << "Diem trung binh cua "<<n<<" mon hoc: " << 1.0f * sum / x;
+	return 0;
+}

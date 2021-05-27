@@ -1,0 +1,34 @@
+#include<iostream>
+
+using namespace std;
+
+int main () {
+	int n;
+	char s;
+	cin >> n;
+	if (0 <= n && n <= 9) {
+		s = char(n + '0');
+
+		if (s == '0')
+			cout << "khong";
+		else if (s == '1')
+			cout << "mot";
+		else if (s == '2')
+			cout << "hai";
+		else if (s == '3')
+			cout << "ba";
+		else if (s == '4')
+			cout << "bon";
+		else if (s == '5')
+			cout << "nam";
+		else if (s == '6')
+			cout << "sau";
+		else if (s == '7')
+			cout << "bay";
+		else if (s == '8')
+			cout << "tam";
+		else
+			cout << "chin";
+	}
+	return 0;
+}
